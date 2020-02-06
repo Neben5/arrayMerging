@@ -9,6 +9,7 @@ public class Sorter{
     private final int[][] arrays;
     private final int[] iterations;
     private final int[] size;
+    private boolean[] states;
 
     private final int[] retval;
 
@@ -20,6 +21,14 @@ public class Sorter{
         for (int i = 0; i < this.arrays.length; i++) {
             this.size[i] = arrays[i].length;
         }
+    }
+    public int[] sort(){
+        for(int i = 0; i<arrays.length; i++){
+            if(iterations[i]<size[i]){
+
+            }
+        }
+        return retval;
     }
     /**
      * iterate through arrays if( 2 or more are same ) -> place that value, move all
