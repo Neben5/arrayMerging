@@ -2,7 +2,7 @@ package src.arrayMerging;
 
 // Java implementation of Min Heap 
 public class MinHeap {
-    private int[] Heap;
+    public int[] Heap;
     private int size;
     private int maxsize;
 
@@ -58,6 +58,7 @@ public class MinHeap {
         // If the node is a non-leaf node and greater
         // than any of its child
         if (!isLeaf(pos)) {
+            //if node is greater than left or greater than right
             if (Heap[pos] > Heap[leftChild(pos)] || Heap[pos] > Heap[rightChild(pos)]) {
 
                 // Swap with the left child and heapify
@@ -73,6 +74,9 @@ public class MinHeap {
                     swap(pos, rightChild(pos));
                     minHeapify(rightChild(pos));
                 }
+            } else if(Heap[pos]==Heap[leftChild(pos)]||Heap[pos]==Heap[rightChild(pos)]){
+                Heap[pos]=Integer.MIN_VALUE;
+                minHeap();
             }
         }
     }
@@ -124,7 +128,8 @@ public class MinHeap {
         minHeap.insert(22);
         minHeap.insert(9);
         minHeap.minHeap();
-
-        System.out.println("The Min val is " + minHeap.remove());
+        for(int i : minHeap.Heap){
+        System.out.println(i);
+        }
     }
 }
