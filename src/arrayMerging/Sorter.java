@@ -1,4 +1,4 @@
-package src.arrayMerging;
+package arrayMerging;
 
 public class Sorter{
     /**
