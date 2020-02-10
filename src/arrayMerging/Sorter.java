@@ -35,27 +35,27 @@ public class Sorter extends Thread {
         ArrayList<Integer> arr = new ArrayList<>();
         int i = 0;
         int j = 0;
-
+        //so as to iterate over both arrays as long as their index isn't exceeded
         while (i < leftArr.length && j < rightArr.length) {
             if (leftArr[i] < rightArr[j]) {
-                if (arr.size() == 0) {
+                if (arr.size() == 0) { //dont get a indexoutofbounds on first iter
                     arr.add(leftArr[i]);
-                } else if (leftArr[i] != arr.get(arr.size() - 1)) {
+                } else if (leftArr[i] != arr.get(arr.size() - 1)) { //skip repeats
                     arr.add(leftArr[i]);
                 }
-                i++;
+                i++; 
             } else if (leftArr[i] == rightArr[j]) {
-                if (arr.size() == 0) {
+                if (arr.size() == 0) { //dont get a indexoutofbounds on first iter
                     arr.add(leftArr[i]);
-                } else if (leftArr[i] != arr.get(arr.size() - 1)) {
+                } else if (leftArr[i] != arr.get(arr.size() - 1)) { //skip repeats
                     arr.add(leftArr[i]);
                 }
                 i++;
                 j++;
             } else {
-                if (arr.size() == 0) {
+                if (arr.size() == 0) { //dont get a indexoutofbounds on first iter
                     arr.add(rightArr[i]);
-                } else if (rightArr[j] != arr.get(arr.size() - 1)) {
+                } else if (rightArr[j] != arr.get(arr.size() - 1)) { //skip repeats
                     arr.add(rightArr[j]);
                 }
                 j++;
@@ -63,12 +63,12 @@ public class Sorter extends Thread {
 
         }
 
-        while (i < leftArr.length) {
+        while (i < leftArr.length) { //add rest
             arr.add(leftArr[i]);
             i++;
         }
 
-        while (j < rightArr.length) {
+        while (j < rightArr.length) { //add rest
             arr.add(rightArr[j]);
             j++;
         }
