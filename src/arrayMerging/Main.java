@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 public class Main {
     final String path;
@@ -16,6 +15,10 @@ public class Main {
         Main main = new Main();
     }
 
+    /**
+     * runs the sorting algorithm, prints time taken, writes output to output.txt
+     * @throws IOException not bothering to handle an actual exception correctly lol
+     */
     public Main() throws IOException {
         path = getInput();
         long startTime = System.nanoTime();
@@ -23,28 +26,25 @@ public class Main {
         Integer[][] arrays = split(
                 read(new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))))));
 
-        System.out.println("Getting averages");
+        System.out.println("Sorting");
 
-        // MergeSort sorter = new MergeSort(arrays);
-        // String[] results =sorter.thing();
-        int cores = Runtime.getRuntime().availableProcessors();
-        /*
-         * Sorter[] sorters = new Sorter[cores-1]; for(int i = 0; i < cores-1; i++){
-         * 
-         * }
-         */
         Sorter sorter = new Sorter(arrays);
-        sorter.run();
-        String[] results = sorter.getResults();
-        System.out.println("Got averages");
+        sorter.run(); //forgot about due date, did not have time to multithread
 
+        String[] results = sorter.getResults();
+        System.out.println("Finished");
         write(results);
 
         long endTime = System.nanoTime();
         long execTime = (endTime - startTime);
-        System.out.println("Took : " + execTime / (long) 1000000000 + " second(s)");
+        System.out.println("Took : " + (double) execTime /  1000000000. + " second(s)");
     }
 
+    /**
+     * writes the end result to a file
+     * 
+     * @param results end result
+     */
     public void write(String[] results) throws IOException {
         Pattern pattern = Pattern.compile("\\\\|/");
         String[] pathParts = pattern.split(path);
@@ -60,14 +60,13 @@ public class Main {
         System.out.println(outPath);
         BufferedWriter writer = new BufferedWriter(new FileWriter(outPath));
         for (String st : results) {
-            writer.write(st);
-            writer.newLine();
+            writer.write(st+' ');
         }
         writer.close();
     }
 
-    /*
-     * splits the raw lines into queries and numbers
+    /**
+     * splits the raw lines into arrays
      * 
      * @param lines raw lines from file
      */
@@ -80,14 +79,14 @@ public class Main {
             Integer[] array = new Integer[arraySize];
             String[] line = lines[i + 1].split("\\s");
             for (int j = 1; j < line.length; j++) {
-                array[j-1] = Integer.parseInt(line[j]);
+                array[j - 1] = Integer.parseInt(line[j]);
             }
             arrays[i] = array;
         }
         return arrays;
     }
 
-    /*
+    /**
      * reads file, gives lines
      * 
      * @param br the reader
@@ -108,7 +107,7 @@ public class Main {
         return out;
     }
 
-    /*
+    /**
      * gets the path for read file
      * 
      * @return filepath
@@ -121,5 +120,5 @@ public class Main {
         in.close();
         return out;
     }
-    
+
 }
